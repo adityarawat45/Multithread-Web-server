@@ -23,10 +23,8 @@ public class Client {
             Socket socket = new Socket(addr, port);
             PrintWriter toClient = new PrintWriter(socket.getOutputStream());
             BufferedReader fromCLient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
             toClient.println("Hello from the client!");
             String line = fromCLient.readLine();
-
             System.out.println("response from the socket : " + line);
 
             toClient.close();

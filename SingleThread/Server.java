@@ -25,7 +25,10 @@ public class Server {
                 System.out.println("Connection accepeted from : " + accepteConnection.getRemoteSocketAddress());
                 PrintWriter toClient = new PrintWriter(accepteConnection.getOutputStream());
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(accepteConnection.getInputStream()));
-                toClient.println("Static response from the server");
+                toClient.println("Server says Heyyy");
+                // String clientReq = fromClient.readLine();
+                // System.out.println("Req from Client : " + clientReq);
+
                 toClient.close();
                 fromClient.close();
                 accepteConnection.close();
