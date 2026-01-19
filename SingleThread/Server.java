@@ -14,19 +14,21 @@ public class Server {
         } 
     }
 
-    public static void run() {
+    public static void run() throws IOException{
         int port = 8010;
-
+        ServerSocket socket = new ServerSocket(port);
+        socket.setSoTimeout(10000);
         while(true) {
             try {
-                ServerSocket socket = new ServerSocket(port);
-                socket.setSoTimeout(10000);
                 System.out.println("Server is listening on port : " + port);
                 Socket accepteConnection = socket.accept();
                 System.out.println("Connection accepeted from : " + accepteConnection.getRemoteSocketAddress());
                 PrintWriter toClient = new PrintWriter(accepteConnection.getOutputStream());
                 BufferedReader fromClient = new BufferedReader(new InputStreamReader(accepteConnection.getInputStream()));
                 toClient.println("Static response from the server");
+                toClient.close();
+                fromClient.close();
+                accepteConnection.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
